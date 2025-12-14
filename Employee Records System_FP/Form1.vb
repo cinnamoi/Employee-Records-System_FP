@@ -1,177 +1,152 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports System.Data
 
 Public Class Form1
 
-    Private conn As New MySqlConnection("server=localhost;userid=root;password=123456;database=employee_db;")
-    Private selectedId As Integer = -1
-    Private dgvEmployees As Object
-    Private connectionString As String
+    Dim conn As MySqlConnection
+    Dim COMMAND As MySqlCommand
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dgvEmployees = New DataGridView()
-        dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvEmployees.AllowUserToAddRows = False
-        dgvEmployees.ReadOnly = True
+        LoadDepartments()
 
-        ' Set department choices
-        cmbDepartment.Items.AddRange({"HR", "IT", "Finance", "Sales", "Marketing"})
-
-        LoadData()
+        NumericUpDownSalary.Minimum = 0
+        NumericUpDownSalary.Maximum = 1000000
+        NumericUpDownSalary.DecimalPlaces = 0
     End Sub
 
+
+    Private Sub LoadDepartments()
+        ComboBoxDepartment.Items.Clear()
+        ComboBoxDepartment.Items.Add("HR")
+        ComboBoxDepartment.Items.Add("IT")
+        ComboBoxDepartment.Items.Add("Finance")
+        ComboBoxDepartment.Items.Add("Marketing")
+        ComboBoxDepartment.Items.Add("Operations")
+
+        ComboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList
+    End Sub
+
+
     Private Sub ButtonConnect_Click(sender As Object, e As EventArgs) Handles ButtonConnect.Click
+        conn = New MySqlConnection("server=localhost; userid=root; password=root; database=employee_records_system;")
+
         Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                MessageBox.Show("Connected successfully!")
-            End Using
+            conn.Open()
+            MessageBox.Show("Connected")
+            conn.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
     End Sub
 
-    Private Sub LoadData()
+
+    Private Sub ButtonCreate_Click(sender As Object, e As EventArgs) Handles ButtonCreate.Click
+        Dim query As String =
+            "INSERT INTO employee_tbl (name, position, salary, department) 
+             VALUES (@name, @position, @salary, @department);"
+
         Try
-            Dim sql As String = "SELECT id, name, position, salary, department FROM employees WHERE is_deleted = 0"
-            Dim cmd As New MySqlCommand(sql, conn)
-            Dim da As New MySqlDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
-            dgvEmployees.DataSource = dt
+            Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=employee_records_system;")
+                conn.Open()
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@name", TextBoxName.Text)
+                    cmd.Parameters.AddWithValue("@position", TextBoxPosition.Text)
+                    cmd.Parameters.AddWithValue("@salary", NumericUpDownSalary.Value)
+                    cmd.Parameters.AddWithValue("@department", ComboBoxDepartment.Text)
+
+                    cmd.ExecuteNonQuery()
+                    MessageBox.Show("Record inserted successfully!")
+                End Using
+            End Using
         Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 
-    Private Sub ClearFields()
-        txtName.Clear()
-        txtPosition.Clear()
 
-        ' NumericUpDown reset
-        numupdownSalary.Value = 0
+    Private Sub ButtonRead_Click(sender As Object, e As EventArgs) Handles ButtonRead.Click
+        Dim query As String =
+            "SELECT * FROM employee_tbl WHERE is_deleted = 0;"
 
-        ' ComboBox reset
-        cmbDepartment.SelectedIndex = -1
+        Try
+            Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=employee_records_system;")
+                Using adapter As New MySqlDataAdapter(query, conn)
+                    Dim table As New DataTable()
+                    adapter.Fill(table)
 
-        selectedId = -1
+                    DataGridViewRecord.DataSource = table
+                    DataGridViewRecord.Columns("id").Visible = False
+                    DataGridViewRecord.Columns("is_deleted").Visible = False
+                End Using
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
-    Private Sub DgvEmployees_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dvgEmployees.CellClick
+
+    Private Sub DataGridViewRecord_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewRecord.CellClick
         If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvEmployees.Rows(e.RowIndex)
+            Dim row As DataGridViewRow = DataGridViewRecord.Rows(e.RowIndex)
 
-            selectedId = Convert.ToInt32(row.Cells("id").Value)
-            txtName.Text = row.Cells("name").Value.ToString()
-            txtPosition.Text = row.Cells("position").Value.ToString()
-            numupdownSalary.Value = Convert.ToDecimal(row.Cells("salary").Value)
-            cmbDepartment.Text = row.Cells("department").Value.ToString()
+            TextBoxName.Text = row.Cells("name").Value.ToString()
+            TextBoxPosition.Text = row.Cells("position").Value.ToString()
+            NumericUpDownSalary.Value = Convert.ToDecimal(row.Cells("salary").Value)
+            ComboBoxDepartment.Text = row.Cells("department").Value.ToString()
+            TextBoxHiddenId.Text = row.Cells("id").Value.ToString()
         End If
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
-        If txtName.Text.Trim() = "" OrElse
-           txtPosition.Text.Trim() = "" OrElse
-           cmbDepartment.SelectedIndex = -1 Then
-
-            MessageBox.Show("Please fill all fields.")
-            Return
-        End If
+    Private Sub ButtonUpdate_Click(sender As Object, e As EventArgs) Handles ButtonUpdate.Click
+        Dim query As String =
+            "UPDATE employee_tbl 
+             SET name=@name, position=@position, salary=@salary, department=@department 
+             WHERE id=@id;"
 
         Try
-            Dim sql As String = "INSERT INTO employees (name, position, salary, department) VALUES (@n, @p, @s, @d)"
-            Dim cmd As New MySqlCommand(sql, conn)
+            Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=employee_records_system;")
+                conn.Open()
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@id", CInt(TextBoxHiddenId.Text))
+                    cmd.Parameters.AddWithValue("@name", TextBoxName.Text)
+                    cmd.Parameters.AddWithValue("@position", TextBoxPosition.Text)
+                    cmd.Parameters.AddWithValue("@salary", NumericUpDownSalary.Value)
+                    cmd.Parameters.AddWithValue("@department", ComboBoxDepartment.Text)
 
-            cmd.Parameters.AddWithValue("@n", txtName.Text.Trim())
-            cmd.Parameters.AddWithValue("@p", txtPosition.Text.Trim())
-            cmd.Parameters.AddWithValue("@s", numupdownSalary.Value)
-            cmd.Parameters.AddWithValue("@d", cmbDepartment.Text)
-
-            conn.Open()
-            cmd.ExecuteNonQuery()
-            conn.Close()
-
-            MessageBox.Show("Employee added.")
-            LoadData()
-            ClearFields()
-
+                    cmd.ExecuteNonQuery()
+                    MessageBox.Show("Record updated successfully!")
+                End Using
+            End Using
         Catch ex As Exception
-            If conn.State = ConnectionState.Open Then conn.Close()
-            MessageBox.Show("Add error: " & ex.Message)
+            MsgBox(ex.Message)
         End Try
-
     End Sub
 
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
-        If selectedId = -1 Then
-            MessageBox.Show("Select a record first.")
-            Return
-        End If
-
-        If txtName.Text.Trim() = "" OrElse
-           txtPosition.Text.Trim() = "" OrElse
-           cmbDepartment.SelectedIndex = -1 Then
-
-            MessageBox.Show("Please fill all fields.")
-            Return
-        End If
+    Private Sub ButtonDelete_Click(sender As Object, e As EventArgs) Handles ButtonDelete.Click
+        Dim query As String =
+            "UPDATE employee_tbl SET is_deleted = 1 WHERE id=@id;"
 
         Try
-            Dim sql As String = "UPDATE employees SET name=@n, position=@p, salary=@s, department=@d WHERE id=@id"
-            Dim cmd As New MySqlCommand(sql, conn)
+            Using conn As New MySqlConnection("server=localhost; userid=root; password=root; database=employee_records_system;")
+                conn.Open()
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@id", CInt(TextBoxHiddenId.Text))
+                    cmd.ExecuteNonQuery()
 
-            cmd.Parameters.AddWithValue("@n", txtName.Text.Trim())
-            cmd.Parameters.AddWithValue("@p", txtPosition.Text.Trim())
-            cmd.Parameters.AddWithValue("@s", numupdownSalary.Value)
-            cmd.Parameters.AddWithValue("@d", cmbDepartment.Text)
-            cmd.Parameters.AddWithValue("@id", selectedId)
+                    MessageBox.Show("Record deleted successfully!")
 
-            conn.Open()
-            cmd.ExecuteNonQuery()
-            conn.Close()
-
-            MessageBox.Show("Employee updated.")
-            LoadData()
-            ClearFields()
-
+                    TextBoxName.Clear()
+                    TextBoxPosition.Clear()
+                    NumericUpDownSalary.Value = 0
+                    ComboBoxDepartment.SelectedIndex = -1
+                    TextBoxHiddenId.Clear()
+                End Using
+            End Using
         Catch ex As Exception
-            If conn.State = ConnectionState.Open Then conn.Close()
-            MessageBox.Show("Update error: " & ex.Message)
+            MsgBox(ex.Message)
         End Try
-
-    End Sub
-
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-
-        If selectedId = -1 Then
-            MessageBox.Show("Select a record first.")
-            Return
-        End If
-
-        If MessageBox.Show("Are you sure you want to delete this record?", "Confirm", MessageBoxButtons.YesNo) = DialogResult.No Then
-            Return
-        End If
-
-        Try
-            Dim sql As String = "UPDATE employees SET is_deleted = 1 WHERE id=@id"
-            Dim cmd As New MySqlCommand(sql, conn)
-            cmd.Parameters.AddWithValue("@id", selectedId)
-
-            conn.Open()
-            cmd.ExecuteNonQuery()
-            conn.Close()
-
-            MessageBox.Show("Employee deleted.")
-            LoadData()
-            ClearFields()
-
-        Catch ex As Exception
-            If conn.State = ConnectionState.Open Then conn.Close()
-            MessageBox.Show("Delete error: " & ex.Message)
-        End Try
-
     End Sub
 
 End Class

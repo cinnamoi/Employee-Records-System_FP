@@ -22,214 +22,230 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtPosition = New System.Windows.Forms.TextBox()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.dvgEmployees = New System.Windows.Forms.DataGridView()
+        Me.TextBoxPosition = New System.Windows.Forms.TextBox()
+        Me.TextBoxName = New System.Windows.Forms.TextBox()
+        Me.DataGridViewRecord = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.numupdownSalary = New System.Windows.Forms.NumericUpDown()
-        Me.cmbDepartment = New System.Windows.Forms.ComboBox()
+        Me.NumericUpDownSalary = New System.Windows.Forms.NumericUpDown()
+        Me.ComboBoxDepartment = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnCreate = New System.Windows.Forms.Button()
-        Me.btnRead = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.ButtonCreate = New System.Windows.Forms.Button()
+        Me.ButtonRead = New System.Windows.Forms.Button()
+        Me.ButtonUpdate = New System.Windows.Forms.Button()
+        Me.ButtonDelete = New System.Windows.Forms.Button()
         Me.ButtonConnect = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        CType(Me.dvgEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numupdownSalary, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TextBoxHiddenId = New System.Windows.Forms.TextBox()
+        CType(Me.DataGridViewRecord, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDownSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtPosition
+        'TextBoxPosition
         '
-        Me.txtPosition.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtPosition.Location = New System.Drawing.Point(148, 87)
-        Me.txtPosition.Name = "txtPosition"
-        Me.txtPosition.Size = New System.Drawing.Size(124, 20)
-        Me.txtPosition.TabIndex = 0
+        Me.TextBoxPosition.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TextBoxPosition.Location = New System.Drawing.Point(88, 101)
+        Me.TextBoxPosition.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxPosition.Name = "TextBoxPosition"
+        Me.TextBoxPosition.Size = New System.Drawing.Size(164, 22)
+        Me.TextBoxPosition.TabIndex = 0
         '
-        'txtName
+        'TextBoxName
         '
-        Me.txtName.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtName.Location = New System.Drawing.Point(148, 50)
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(124, 20)
-        Me.txtName.TabIndex = 2
+        Me.TextBoxName.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TextBoxName.Location = New System.Drawing.Point(88, 66)
+        Me.TextBoxName.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxName.Name = "TextBoxName"
+        Me.TextBoxName.Size = New System.Drawing.Size(164, 22)
+        Me.TextBoxName.TabIndex = 2
         '
-        'dvgEmployees
+        'DataGridViewRecord
         '
-        Me.dvgEmployees.BackgroundColor = System.Drawing.SystemColors.Info
-        Me.dvgEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dvgEmployees.Location = New System.Drawing.Point(12, 184)
-        Me.dvgEmployees.Name = "dvgEmployees"
-        Me.dvgEmployees.Size = New System.Drawing.Size(401, 135)
-        Me.dvgEmployees.TabIndex = 3
+        Me.DataGridViewRecord.BackgroundColor = System.Drawing.SystemColors.Info
+        Me.DataGridViewRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewRecord.Location = New System.Drawing.Point(25, 145)
+        Me.DataGridViewRecord.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridViewRecord.Name = "DataGridViewRecord"
+        Me.DataGridViewRecord.RowHeadersWidth = 51
+        Me.DataGridViewRecord.Size = New System.Drawing.Size(489, 166)
+        Me.DataGridViewRecord.TabIndex = 3
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(104, 57)
+        Me.Label1.Location = New System.Drawing.Point(33, 72)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(47, 16)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Name:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(95, 87)
+        Me.Label2.Location = New System.Drawing.Point(22, 107)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(47, 13)
+        Me.Label2.Size = New System.Drawing.Size(58, 16)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Position:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(77, 160)
+        Me.Label3.Location = New System.Drawing.Point(263, 104)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 13)
+        Me.Label3.Size = New System.Drawing.Size(80, 16)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Department:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(103, 126)
+        Me.Label4.Location = New System.Drawing.Point(294, 72)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 13)
+        Me.Label4.Size = New System.Drawing.Size(49, 16)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Salary:"
         '
-        'numupdownSalary
+        'NumericUpDownSalary
         '
-        Me.numupdownSalary.Location = New System.Drawing.Point(148, 124)
-        Me.numupdownSalary.Name = "numupdownSalary"
-        Me.numupdownSalary.Size = New System.Drawing.Size(120, 20)
-        Me.numupdownSalary.TabIndex = 8
+        Me.NumericUpDownSalary.Location = New System.Drawing.Point(351, 67)
+        Me.NumericUpDownSalary.Margin = New System.Windows.Forms.Padding(4)
+        Me.NumericUpDownSalary.Name = "NumericUpDownSalary"
+        Me.NumericUpDownSalary.Size = New System.Drawing.Size(160, 22)
+        Me.NumericUpDownSalary.TabIndex = 8
         '
-        'cmbDepartment
+        'ComboBoxDepartment
         '
-        Me.cmbDepartment.FormattingEnabled = True
-        Me.cmbDepartment.Items.AddRange(New Object() {" marketing", " operations", "human resources", " finance"})
-        Me.cmbDepartment.Location = New System.Drawing.Point(147, 157)
-        Me.cmbDepartment.Name = "cmbDepartment"
-        Me.cmbDepartment.Size = New System.Drawing.Size(121, 21)
-        Me.cmbDepartment.TabIndex = 9
+        Me.ComboBoxDepartment.FormattingEnabled = True
+        Me.ComboBoxDepartment.Items.AddRange(New Object() {" marketing", " operations", "human resources", " finance"})
+        Me.ComboBoxDepartment.Location = New System.Drawing.Point(351, 101)
+        Me.ComboBoxDepartment.Margin = New System.Windows.Forms.Padding(4)
+        Me.ComboBoxDepartment.Name = "ComboBoxDepartment"
+        Me.ComboBoxDepartment.Size = New System.Drawing.Size(160, 24)
+        Me.ComboBoxDepartment.TabIndex = 9
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.SystemColors.ScrollBar
         Me.Label5.Font = New System.Drawing.Font("Century Schoolbook", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(124, 9)
+        Me.Label5.Location = New System.Drawing.Point(152, 20)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(248, 19)
+        Me.Label5.Size = New System.Drawing.Size(304, 25)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Employee Recording System"
         '
-        'btnCreate
+        'ButtonCreate
         '
-        Me.btnCreate.Location = New System.Drawing.Point(32, 337)
-        Me.btnCreate.Name = "btnCreate"
-        Me.btnCreate.Size = New System.Drawing.Size(75, 23)
-        Me.btnCreate.TabIndex = 11
-        Me.btnCreate.Text = "Create"
-        Me.btnCreate.UseVisualStyleBackColor = True
+        Me.ButtonCreate.Location = New System.Drawing.Point(104, 326)
+        Me.ButtonCreate.Margin = New System.Windows.Forms.Padding(4)
+        Me.ButtonCreate.Name = "ButtonCreate"
+        Me.ButtonCreate.Size = New System.Drawing.Size(124, 50)
+        Me.ButtonCreate.TabIndex = 11
+        Me.ButtonCreate.Text = "Create"
+        Me.ButtonCreate.UseVisualStyleBackColor = True
         '
-        'btnRead
+        'ButtonRead
         '
-        Me.btnRead.Location = New System.Drawing.Point(128, 337)
-        Me.btnRead.Name = "btnRead"
-        Me.btnRead.Size = New System.Drawing.Size(75, 23)
-        Me.btnRead.TabIndex = 12
-        Me.btnRead.Text = "Read"
-        Me.btnRead.UseVisualStyleBackColor = True
+        Me.ButtonRead.Location = New System.Drawing.Point(104, 384)
+        Me.ButtonRead.Margin = New System.Windows.Forms.Padding(4)
+        Me.ButtonRead.Name = "ButtonRead"
+        Me.ButtonRead.Size = New System.Drawing.Size(125, 44)
+        Me.ButtonRead.TabIndex = 12
+        Me.ButtonRead.Text = "Read"
+        Me.ButtonRead.UseVisualStyleBackColor = True
         '
-        'btnUpdate
+        'ButtonUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(228, 337)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 13
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
+        Me.ButtonUpdate.Location = New System.Drawing.Point(331, 326)
+        Me.ButtonUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.ButtonUpdate.Name = "ButtonUpdate"
+        Me.ButtonUpdate.Size = New System.Drawing.Size(125, 48)
+        Me.ButtonUpdate.TabIndex = 13
+        Me.ButtonUpdate.Text = "Update"
+        Me.ButtonUpdate.UseVisualStyleBackColor = True
         '
-        'btnDelete
+        'ButtonDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(325, 337)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 14
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.ButtonDelete.Location = New System.Drawing.Point(331, 382)
+        Me.ButtonDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.ButtonDelete.Name = "ButtonDelete"
+        Me.ButtonDelete.Size = New System.Drawing.Size(125, 46)
+        Me.ButtonDelete.TabIndex = 14
+        Me.ButtonDelete.Text = "Delete"
+        Me.ButtonDelete.UseVisualStyleBackColor = True
         '
         'ButtonConnect
         '
-        Me.ButtonConnect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ButtonConnect.Location = New System.Drawing.Point(419, 184)
+        Me.ButtonConnect.Location = New System.Drawing.Point(547, 145)
+        Me.ButtonConnect.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonConnect.Name = "ButtonConnect"
-        Me.ButtonConnect.Size = New System.Drawing.Size(75, 135)
-        Me.ButtonConnect.TabIndex = 16
-        Me.ButtonConnect.Text = "Connect To My Sql"
-        Me.ButtonConnect.UseVisualStyleBackColor = False
+        Me.ButtonConnect.Size = New System.Drawing.Size(98, 166)
+        Me.ButtonConnect.TabIndex = 17
+        Me.ButtonConnect.Text = "Connect"
+        Me.ButtonConnect.UseVisualStyleBackColor = True
         '
-        'btnAdd
+        'TextBoxHiddenId
         '
-        Me.btnAdd.Location = New System.Drawing.Point(419, 337)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(58, 23)
-        Me.btnAdd.TabIndex = 17
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.TextBoxHiddenId.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TextBoxHiddenId.Location = New System.Drawing.Point(557, 66)
+        Me.TextBoxHiddenId.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxHiddenId.Name = "TextBoxHiddenId"
+        Me.TextBoxHiddenId.Size = New System.Drawing.Size(88, 22)
+        Me.TextBoxHiddenId.TabIndex = 18
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.LightCyan
-        Me.ClientSize = New System.Drawing.Size(506, 373)
-        Me.Controls.Add(Me.btnAdd)
+        Me.BackColor = System.Drawing.Color.MintCream
+        Me.ClientSize = New System.Drawing.Size(675, 459)
+        Me.Controls.Add(Me.TextBoxHiddenId)
         Me.Controls.Add(Me.ButtonConnect)
-        Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnRead)
-        Me.Controls.Add(Me.btnCreate)
+        Me.Controls.Add(Me.ButtonDelete)
+        Me.Controls.Add(Me.ButtonUpdate)
+        Me.Controls.Add(Me.ButtonRead)
+        Me.Controls.Add(Me.ButtonCreate)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.cmbDepartment)
-        Me.Controls.Add(Me.numupdownSalary)
+        Me.Controls.Add(Me.ComboBoxDepartment)
+        Me.Controls.Add(Me.NumericUpDownSalary)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.dvgEmployees)
-        Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.txtPosition)
+        Me.Controls.Add(Me.DataGridViewRecord)
+        Me.Controls.Add(Me.TextBoxName)
+        Me.Controls.Add(Me.TextBoxPosition)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.Text = "Form1"
-        CType(Me.dvgEmployees, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numupdownSalary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridViewRecord, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDownSalary, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtPosition As TextBox
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents dvgEmployees As DataGridView
+    Friend WithEvents TextBoxPosition As TextBox
+    Friend WithEvents TextBoxName As TextBox
+    Friend WithEvents DataGridViewRecord As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents numupdownSalary As NumericUpDown
-    Friend WithEvents cmbDepartment As ComboBox
+    Friend WithEvents NumericUpDownSalary As NumericUpDown
+    Friend WithEvents ComboBoxDepartment As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents btnCreate As Button
-    Friend WithEvents btnRead As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnDelete As Button
+    Friend WithEvents ButtonCreate As Button
+    Friend WithEvents ButtonRead As Button
+    Friend WithEvents ButtonUpdate As Button
+    Friend WithEvents ButtonDelete As Button
     Friend WithEvents ButtonConnect As Button
-    Friend WithEvents btnAdd As Button
+    Friend WithEvents TextBoxHiddenId As TextBox
 End Class
